@@ -21,27 +21,24 @@ public class DoubleHashTable<T> extends Hashtable<T> {
         int cursor = 0;
         int index = 0;
         while (cursor < super.tableSize) {
-            index = (primaryHashValue + (cursor * secondaryHashValue)) % super.tableSize;
-            if (index < 0) {
-                index += super.tableSize;
-            }
-            if (super.table[index] == null) {
-                int numProbesForInsert = cursor + 1;
+            index = super.positiveMod(primaryHashValue + (cursor * secondaryHashValue), super.tableSize);
+            int numProbesForInsert = cursor + 1;
+            if (super.table[index] == null) { // index is empty
                 newObject.setProbeCount(numProbesForInsert);
                 super.table[index] = newObject;
                 super.totalInserts++;
                 super.capacity++;
                 super.probes += numProbesForInsert;
                 return;
-            } else if (super.table[index].equals(newObject)) {
+            } else if (super.table[index].equals(newObject)) { // index is occupied by same object
                 super.setDuplicateInserts(super.getDuplicateInserts() + 1);
-                int numProbesForInsert = cursor + 1;
                 super.table[index].setFrequency(super.table[index].getFrequency() + 1);
                 super.totalInserts++;
                 super.probes += numProbesForInsert;
                 return;
+            } else {
+                cursor++;
             }
-            cursor++;
         }
     }
 

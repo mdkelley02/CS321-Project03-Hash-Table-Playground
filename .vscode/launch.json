@@ -15,7 +15,7 @@
             "name": "Launch HashtableTest",
             "request": "launch",
             "mainClass": "HashtableTest",
-            "args": "1 0.5 2"
+            "args": "3 0.5 1"
         }
     ]
 }

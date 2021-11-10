@@ -15,12 +15,9 @@ public class LinearTable<T> extends Hashtable<T> {
         int cursor = 0;
         int index = 0;
         while (cursor < super.tableSize) {
-            index = (primaryHashValue + cursor) % tableSize;
-            if (index < 0) {
-                index += super.tableSize;
-            }
+            index = super.positiveMod(primaryHashValue + cursor, super.tableSize);
+            int numProbesForInsert = cursor + 1;
             if (super.table[index] == null) {
-                int numProbesForInsert = cursor + 1;
                 newObject.setProbeCount(numProbesForInsert);
                 super.table[index] = newObject;
                 super.totalInserts++;
@@ -29,15 +26,13 @@ public class LinearTable<T> extends Hashtable<T> {
                 return;
             } else if (super.table[index].equals(newObject)) {
                 super.setDuplicateInserts(super.getDuplicateInserts() + 1);
-                int currFrequency = super.table[index].getFrequency();
-                int numProbesForInsert = cursor + 1;
-                super.table[index].setFrequency(currFrequency + 1);
+                super.table[index].setFrequency(super.table[index].getFrequency() + 1);
                 super.totalInserts++;
-                super.capacity++;
                 super.probes += numProbesForInsert;
                 return;
+            } else {
+                cursor++;
             }
-            cursor++;
         }
     }
 }

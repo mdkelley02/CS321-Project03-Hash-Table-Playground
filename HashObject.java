@@ -35,7 +35,8 @@ public class HashObject<T> {
 
     @Override
     public boolean equals(Object other) {
-        return (this.getClass() == other.getClass()
-                && this.getKey().hashCode() == ((HashObject<T>) other).getKey().hashCode());
+        Boolean isSameClass = other.getClass().equals(this.getClass());
+        Boolean hasSameHashCode = ((HashObject<T>) other).getKey().hashCode() == this.getKey().hashCode();
+        return (isSameClass && hasSameHashCode);
     }
 }

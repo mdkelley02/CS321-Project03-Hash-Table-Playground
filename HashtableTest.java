@@ -133,18 +133,18 @@ class Run {
 
         System.out.printf("\nHashtableTest: Twin prime table size found in the range [%d, %d]: %d\n",
                 STARTING_TABLE_RANGE, ENDING_TABLE_RANGE, this.tableSize);
-        System.out.printf("HashtableTest: Data source type --> %s\n\n", dataSourceString);
+        System.out.printf("\nHashtableTest: Data source type --> %s\n", dataSourceString);
 
-        System.out.printf("HashtableTest: Using Linear Hashing....\n");
+        System.out.printf("\nHashtableTest: Using Linear Hashing....\n");
         System.out.printf("HashtableTest: Input %d elements, of which %d duplicates\n",
                 this.linearTable.getTotalInserts(), this.linearTable.getDuplicateInserts());
-        System.out.printf("HashtableTest: load factor = %.2f, Avg. no. of probes %.5f\n\n",
+        System.out.printf("HashtableTest: load factor = %.2f, Avg. no. of probes %f\n",
                 this.linearTable.getLoadFactor(), this.linearTable.getAverageProbes());
 
-        System.out.printf("HashtableTest: Using Double Hashing....\n");
+        System.out.printf("\nHashtableTest: Using Double Hashing....\n");
         System.out.printf("HashtableTest: Input %d elements, of which %d duplicates\n",
                 this.doubleHashTable.getTotalInserts(), this.doubleHashTable.getDuplicateInserts());
-        System.out.printf("HashtableTest: load factor = %.2f, Avg. no. of probes %.5f\n",
+        System.out.printf("HashtableTest: load factor = %.2f, Avg. no. of probes %f\n",
                 this.doubleHashTable.getLoadFactor(), this.doubleHashTable.getAverageProbes());
     }
 

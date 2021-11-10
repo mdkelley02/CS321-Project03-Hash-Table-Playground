@@ -45,9 +45,9 @@ abstract class Hashtable<T> {
         return totalInserts;
     }
 
-    public float getAverageProbes() {
+    public double getAverageProbes() {
         try {
-            return (float) probes / totalInserts;
+            return (double) probes / totalInserts;
         } catch (ArithmeticException e) {
             return 0;
         }
