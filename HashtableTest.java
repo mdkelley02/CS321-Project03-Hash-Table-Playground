@@ -1,6 +1,12 @@
 import java.util.Random;
 import java.io.*;
 
+/**
+ * @author Matthew Kelley
+ * 
+ *         Main entry point for program. Parses command line arguments and runs
+ *         the program provided they are valid.
+ */
 public class HashtableTest {
 
     public static void main(String[] args) {
@@ -15,6 +21,12 @@ public class HashtableTest {
         new Run(inputType, loadFactor, debugLevel);
     }
 
+    /**
+     * Validates command line arguments. If any arguments fail validation, program
+     * will exit with non-zero exit status.
+     * 
+     * @param args - Command line arguments
+     */
     public static void validateArguments(String[] args) {
         int numArgs = args.length;
         if (numArgs == 2) {
@@ -65,6 +77,14 @@ public class HashtableTest {
 
 }
 
+/**
+ * @author Matthew Kelley
+ * 
+ *         Contains all logic for running hash table tests. Generates the table
+ *         size within the range [95500, 96000]. Inserts the specified data type
+ *         into both the linear and double hash table. Once inserts have
+ *         completed, an output will be generated based on the debug level.
+ */
 class Run {
     private final int STARTING_TABLE_RANGE = 95500;
     private final int ENDING_TABLE_RANGE = 96000;
@@ -109,8 +129,8 @@ class Run {
             outputTablesToFile();
         }
         case 2 -> {
-            printTablesSummary();
             outputTableInserts();
+            printTablesSummary();
         }
         default -> {
             printTablesSummary();

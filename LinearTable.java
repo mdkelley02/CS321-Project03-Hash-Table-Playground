@@ -1,3 +1,9 @@
+/**
+ * @author Matthew Kelley
+ * 
+ *         Array based implementation of a hashtable. Using linear probing for
+ *         collision resolution.
+ */
 public class LinearTable<T> extends Hashtable<T> {
     public LinearTable(int tableSize, String fileName) {
         super(tableSize, fileName);
@@ -23,12 +29,13 @@ public class LinearTable<T> extends Hashtable<T> {
                 super.totalInserts++;
                 super.capacity++;
                 super.probes += numProbesForInsert;
+                super.addToInsertLog(newObject, index, numProbesForInsert, "LinearTable");
                 return;
             } else if (super.table[index].equals(newObject)) {
                 super.setDuplicateInserts(super.getDuplicateInserts() + 1);
                 super.table[index].setFrequency(super.table[index].getFrequency() + 1);
                 super.totalInserts++;
-                super.probes += numProbesForInsert;
+                super.addToInsertLog(newObject, index, numProbesForInsert, "LinearTable");
                 return;
             } else {
                 cursor++;

@@ -1,3 +1,9 @@
+/**
+ * @author Matthew Kelley
+ * 
+ *         Array based implementation of a hashtable. Using a primary and
+ *         secondary hashing function for generating the hash.
+ */
 public class DoubleHashTable<T> extends Hashtable<T> {
 
     public DoubleHashTable(int tableSize, String fileName) {
@@ -23,18 +29,19 @@ public class DoubleHashTable<T> extends Hashtable<T> {
         while (cursor < super.tableSize) {
             index = super.positiveMod(primaryHashValue + (cursor * secondaryHashValue), super.tableSize);
             int numProbesForInsert = cursor + 1;
-            if (super.table[index] == null) { // index is empty
+            if (super.table[index] == null) {
                 newObject.setProbeCount(numProbesForInsert);
                 super.table[index] = newObject;
                 super.totalInserts++;
                 super.capacity++;
                 super.probes += numProbesForInsert;
+                super.addToInsertLog(newObject, index, numProbesForInsert, "DoubleHashTable");
                 return;
-            } else if (super.table[index].equals(newObject)) { // index is occupied by same object
+            } else if (super.table[index].equals(newObject)) {
                 super.setDuplicateInserts(super.getDuplicateInserts() + 1);
                 super.table[index].setFrequency(super.table[index].getFrequency() + 1);
                 super.totalInserts++;
-                super.probes += numProbesForInsert;
+                super.addToInsertLog(newObject, index, numProbesForInsert, "DoubleHashTable");
                 return;
             } else {
                 cursor++;
